@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std; 
+
+int main(){
+    char choice;
+    double c;
+    double f;
+    double converted;
+cout<<"Choose What you want to convert from: (F)arenheit, or (C)elsius: ";
+cin>>choice;
+if (choice =='C' || choice == 'c')
+{
+    cout<<"Enter degrees: ";
+    cin>>c;
+converted = (c*1.8)+32;
+cout<<"that is: "<<converted<<" degrees Farenheit"; 
+
+}
+else if (choice=='F'|| choice == 'f')
+{
+    cout<<"Enter degrees: ";
+    cin>>f;
+
+    converted=(f-32)*.555;
+    cout<<"that is: "<<converted<<" degrees Celsius"; 
+
+}
+
+
+}
