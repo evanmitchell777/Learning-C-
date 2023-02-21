@@ -44,7 +44,7 @@ void delete_file(){
         cout<<"file has been deleted \n";
     }
     else{
-        cout<<"failed to delete file \n"
+        cout<<"failed to delete file \n";
     }
 }
 
