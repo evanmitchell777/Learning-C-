@@ -1,0 +1,69 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+ string the_file;
+ 
+ void write_to_file(){
+   cout << "enter file you want to edit: ";
+    cin >> the_file;
+    
+    cin.ignore();
+
+    cout<<"Type here: ";
+    string add_to_file;
+    getline(cin,add_to_file);
+
+    ofstream file(the_file, ios::app);
+
+    file<<add_to_file<<endl;
+    file.close();
+
+ }
+
+void read_file(string the_file) {
+    ifstream file(the_file);
+    if (!file.is_open()) {
+        cerr << "Unable to open file: " << the_file << endl;
+        return;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        cout << line << endl;
+    }
+
+    file.close();
+}
+void delete_file(){
+    cout<<"enter the file you want to delete: ";
+    cin>>the_file;
+    
+    int result= remove(the_file.c_str());
+    if(result==0){
+        cout<<"file has been deleted \n";
+    }
+    else{
+        cout<<"failed to delete file \n"
+    }
+}
+
+int main(){
+  char choice;
+  while (choice!='q'){
+  cout<<"would you like to (W)rite to a file, (D)elete file, (R)ead file, Or (Q)uit: ";
+  cin>>choice;
+if(choice== 'W' || choice =='w'){
+write_to_file();
+read_file(the_file);
+}else if(choice=='R'||choice=='r'){
+  cout<<"select file you want to read: ";
+  cin>>the_file;
+read_file(the_file);
+}
+else if (choice=='D' || choice=='d')
+{
+delete_file();
+}
+}
+}
