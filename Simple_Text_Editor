@@ -1,33 +1,26 @@
-/*To Do:
-Add error handeling
-Add input validation 
-
-Add Smart Pointers 
-
-*/
-
+//A simple Text Editor that I made from scratch Slowly adding features as I learn more about C++
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <memory>
+
 using namespace std;
- string the_file;
- 
- void write_to_file(){
-   cout << "enter file you want to edit: ";
+
+string the_file;
+
+void write_to_file() {
+    cout << "enter file you want to edit: ";
     cin >> the_file;
-    
     cin.ignore();
-
-    cout<<"Type here: ";
+    cout << "Type here: ";
     string add_to_file;
-    getline(cin,add_to_file);
+    getline(cin, add_to_file);
 
-    ofstream file(the_file, ios::app);
+    unique_ptr<ofstream> file(new ofstream(the_file, ios::app));
 
-    file<<add_to_file<<endl;
-    file.close();
-
- }
+    *file << add_to_file << endl;
+    file->close();
+}
 
 void read_file(string the_file) {
     ifstream file(the_file);
@@ -43,59 +36,59 @@ void read_file(string the_file) {
 
     file.close();
 }
-void delete_file(){
-    cout<<"enter the file you want to delete: ";
-    cin>>the_file;
-    
-    int result= remove(the_file.c_str());
-    if(result==0){
-        cout<<"file has been deleted \n";
-    }
-    else{
-        cout<<"failed to delete file \n";
-    }
-}
 
-int main(){
-  char choice;
- while (choice!='q'){
-  cout<<"would you like to (W)rite to a file, (D)elete file, (R)ead file, Or (Q)uit: ";
-  cin>>choice;
-
-   switch (choice) {
-        case 'W':
-case 'w':
-    write_to_file();
-    read_file(the_file);
-    break; 
-case 'R':
-case 'r':
-    cout << "select file you want to read: ";
+void delete_file() {
+    cout << "enter the file you want to delete: ";
     cin >> the_file;
-    read_file(the_file);
-    break;
-case 'D':
-case 'd':
-    cout<<"Are you sure you want to delete this file? enter y or n: "; 
+
+    cout << "Are you sure you want to delete this file? enter y or n: ";
     char option;
-    cin>>option;
+    cin >> option;
 
-    switch (option)
-    {
-    case 'y':
-    case 'Y':
-    delete_file();
-    break; 
-    case 'n':
-    case 'N':
-    cout<<"File will not be deleted.";
-    break;
-
-    default:
-    cout<<"That is an invalid option.";
-    break;
+    switch (option) {
+        case 'y':
+        case 'Y': {
+            int result = remove(the_file.c_str());
+            if (result == 0) {
+                cout << "file has been deleted \n";
+            } else {
+                cout << "failed to delete file \n";
+            }
+            break;
+        }
+        case 'n':
+        case 'N':
+            cout << "File will not be deleted.";
+            break;
+        default:
+            cout << "That is an invalid option.";
+            break;
     }
-    
 }
-}
+
+int main() {
+    char choice;
+    while (choice != 'q') {
+        cout << "would you like to (W)rite to a file, (D)elete file, (R)ead file, Or (Q)uit: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 'W':
+            case 'w':
+                write_to_file();
+                read_file(the_file);
+                break;
+            case 'R':
+            case 'r':
+                cout << "select file you want to read: ";
+                cin >> the_file;
+                read_file(the_file);
+                break;
+            case 'D':
+            case 'd':
+                delete_file();
+                break;
+        }
+    }
+    return 0;
 }
