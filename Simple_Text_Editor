@@ -1,8 +1,8 @@
-//A simple Text Editor that I made from scratch Slowly adding features as I learn more about C++
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <memory>
+#include <cctype>
 
 using namespace std;
 
@@ -45,9 +45,8 @@ void delete_file() {
     char option;
     cin >> option;
 
-    switch (option) {
-        case 'y':
-        case 'Y': {
+    switch (tolower(option)) {
+        case 'y': {
             int result = remove(the_file.c_str());
             if (result == 0) {
                 cout << "file has been deleted \n";
@@ -57,7 +56,6 @@ void delete_file() {
             break;
         }
         case 'n':
-        case 'N':
             cout << "File will not be deleted.";
             break;
         default:
@@ -72,22 +70,20 @@ int main() {
         cout << "would you like to (W)rite to a file, (D)elete file, (R)ead file, Or (Q)uit: ";
         cin >> choice;
 
-        switch (choice) {
-            case 'W':
+        switch (tolower(choice)) {
             case 'w':
                 write_to_file();
                 read_file(the_file);
                 break;
-            case 'R':
             case 'r':
                 cout << "select file you want to read: ";
                 cin >> the_file;
                 read_file(the_file);
                 break;
-            case 'D':
             case 'd':
                 delete_file();
                 break;
+
         }
     }
     return 0;
