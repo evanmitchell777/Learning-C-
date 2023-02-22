@@ -1,3 +1,11 @@
+/*To Do:
+Add error handeling
+Add input validation 
+
+Add Smart Pointers 
+
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
