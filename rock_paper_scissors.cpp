@@ -12,30 +12,31 @@ srand (time(NULL));
 int RandIndex = rand() %5;
 string cc = choices[RandIndex];
 
+
 cout<<"Enter rock, paper or scissors: ";
 string user_choice;
 cin>>user_choice;
 
-cout<<"I choose "<<cc<<endl;
+cout<<"I choose "<< cc;
 
 if (user_choice == "rock" && cc == "rock")
-    cout<<"tie";
+    cout<<" tie";
     else if  (user_choice == "rock" && cc =="paper")
-    cout<<"you lose";
+    cout<<" you lose";
 else if  (user_choice == "rock" && cc =="scissors")
-    cout<<"you win";
+    cout<<" you win";
 else if (user_choice=="paper" && cc=="paper")
-    cout<<"tie";
+    cout<<" tie";
 else if  (user_choice=="paper" && cc=="rock")
-    cout<<"tie";
+    cout<<" tie";
 else if (user_choice =="paper" && cc == "scissors")
-    cout<<"you lose";
+    cout<<" you lose";
 else if( user_choice == "scissors" && cc== "scissors")
-    cout<<"tie";
+    cout<<" tie";
 else if (user_choice=="scissors" && cc=="rock")
-    cout<<"you lose";
+    cout<<" you lose";
 else if  (user_choice== "scissors" && cc=="paper")
-    cout<<"you win";
+    cout<<" you win";
 
 else
     cout<< "enter a valid choice";
