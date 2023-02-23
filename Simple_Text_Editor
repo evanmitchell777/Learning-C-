@@ -3,6 +3,7 @@
 #include <string>
 #include <memory>
 #include <cctype>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -46,20 +47,24 @@ void delete_file() {
     cin >> option;
 
     switch (tolower(option)) {
-        case 'y': {
+        case 'y': 
+        {
             int result = remove(the_file.c_str());
             if (result == 0) {
                 cout << "file has been deleted \n";
             } else {
                 cout << "failed to delete file \n";
             }
+            
             break;
         }
-        case 'n':
-            cout << "File will not be deleted.";
+        case 'n':{
+
+            cout << "File will not be deleted.\n";
             break;
+        }
         default:
-            cout << "That is an invalid option.";
+            cout << "That is an invalid option.\n";
             break;
     }
 }
@@ -83,8 +88,11 @@ int main() {
             case 'd':
                 delete_file();
                 break;
+                 default:
+                cout<<"Invalid input \n"<<endl;
 
         }
     }
+    system("clear");
     return 0;
 }
