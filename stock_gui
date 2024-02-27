@@ -1,0 +1,62 @@
+#include <ftxui/dom/elements.hpp>
+#include <ftxui/screen/screen.hpp>
+#include <iostream>
+#include <cpprest/http_client.h>
+#include <cpprest/json.h>
+#include <nlohmann/json.hpp>
+
+//namespaces:
+using namespace std;
+using namespace web;
+using namespace http;
+using namespace utility;
+using namespace http::client;
+using json = nlohmann::json;
+
+string ticker; //ticker of stock
+
+void backend(string& name, float& price) {
+    cout << "Enter Stock Ticker: ";
+    cin >> ticker;
+
+    // this is where the api will be called
+    http_client client(U("https://api.api-ninjas.com/v1/stockprice?ticker=" + ticker));
+
+    http_request request(methods::GET);
+
+    request.headers().add("X-Api-Key", "XJ1c11T050uh74m/dvtz8g==mQpvfcPshJNFO2xz");
+
+    auto response = client.request(request).get();
+    auto response_body = response.extract_string().get(); // Extract the response body as a string
+
+    // Parse JSON response
+    nlohmann::json jsonData = nlohmann::json::parse(response_body);
+
+    // Assign values to function parameters
+    name = jsonData["name"];
+    price = jsonData["price"];
+}
+
+int main() {
+    string name;
+    float price;
+    backend(name, price);
+
+    using namespace ftxui;
+ 
+    // Define the document
+    Element document =
+        hbox({
+            text(name) | border,
+            text(to_string(price)) | border,
+        });
+ 
+    auto screen = Screen::Create(
+        Dimension::Full(),       // Width
+        Dimension::Fit(document) // Height
+    );
+    Render(screen, document);
+    screen.Print();
+ 
+    return EXIT_SUCCESS;
+}
