@@ -50,14 +50,14 @@ int main() {
 
 
 //send nickname
-//    std::string nick = "NICK abraxas|cpp\r\n";
+//    std::string nick = "NICK NICKNAME|cpp\r\n";
 //    send(clientSocket, nick.c_str(),nick.size(), 0);
 /////////////////////////////////////////////////////
 
 
 
 //send hostname 
-//std::string hostname = "USER your_username hostname servername :smevan\r\n";
+//std::string hostname = "USER your_username hostname servername :hostnameyou\r\n";
 //send(clientSocket,hostname.c_str(), hostname.size(),0);
 
   char buffer[1024];
